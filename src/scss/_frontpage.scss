@@ -1,0 +1,82 @@
+@use "mixins";
+body {
+  background-color: rgb(244, 244, 244);
+  font-size: 1.2rem;
+}
+
+.main__container {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  @include mixins.for-size(desktop) {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  & section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    height: auto;
+    & .results {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    & input {
+      height: 50px;
+      width: 80%;
+      text-align: left;
+      font-size: 0.8em;
+      @include mixins.for-size(desktop) {
+        width: 30%;
+        height: 70px;
+      }
+    }
+
+    & button {
+      width: 40%;
+      margin: 1%;
+      height: auto;
+      font-size: 1em;
+      @include mixins.for-size(desktop) {
+        width: 20%;
+      }
+    }
+  }
+
+  & .list__container {
+    background-color: rgb(255, 255, 255);
+    border: 1px dotted black;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    @include mixins.for-size(desktop) {
+      width: 50%;
+    }
+
+    & li {
+      cursor: pointer;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      list-style-type: none;
+
+      &:hover {
+        color: red;
+        transition: 0.1s;
+        transform: scale(1.2);
+      }
+      &.disable:active {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+  }
+}

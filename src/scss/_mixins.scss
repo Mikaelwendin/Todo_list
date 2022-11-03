@@ -1,0 +1,15 @@
+@mixin for-size($breakpoint) {
+
+    @if $breakpoint ==tablet {
+      @media (min-width: 992px) {
+        @content;
+      }
+    }
+  
+    @else if $breakpoint ==desktop {
+      @media (min-width: 1136px) {
+        @content;
+      }
+    }
+  
+  }

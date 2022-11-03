@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="/src/scss/main.scss">
+    <script defer src="/src/js/main.js"></script>
+</head>
+
+<body>
+    <main class="main__container">
+        <section id="tasksnotdone" class="main__container--todos">
+            <h1>The todo-list</h1>
+            <label for="first">Description</label>
+            <input type="text" id="first">
+            <button id="btn">Add</button>
+            <label for="btn--sort">Sort the list</label>
+            <button id="btn--sort">Sort</button>
+            <section class="results">
+            <h2 class="todos__h2">Things to do!</h2>
+            <ul class="list__container" id="myList"></ul>
+            </section>
+            <section class="results">
+            <h2 class="todos__h2">Completed tasks!</h2>
+            <button id="btn--delete">Clear</button>
+            <ul class="list__container" id="mySecondList"></ul>
+        </section>
+        </section>
+    </main>
+</body>
+
+</html>
