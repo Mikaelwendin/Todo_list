@@ -11,24 +11,23 @@
 </head>
 
 <body>
-    <main class="main__container">
-        <section id="tasksnotdone" class="main__container--todos">
+    <main class="main__container" id="mainCon">
+        <section class="main__container--todos" id="tasksnotdone">
             <h1>The todo-list</h1>
             <label for="first">Description</label>
             <input type="text" id="first">
             <button id="btn">Add</button>
-            <label for="btn--sort">Sort the list</label>
-            <div class="resultboxes">
-            <section class="results">
-            <h2 class="todos__h2">Things to do!</h2>
-            <button id="btn--sort">Sort</button>
-            <ul class="list__container" id="myList"></ul>
-            </section>
-            <section class="results">
-            <h2 class="todos__h2">Completed tasks!</h2>
-            <button id="btn--delete">Clear</button>
-            <ul class="list__container" id="mySecondList"></ul>
-        </div>
+            <div class="resultboxes" id="rslt">
+                <section class="results" id="results--notcompleted">
+                    <h2 class="todos__h2">Things to do!</h2>
+                    <button id="btn--sort">Sort</button>
+                    <ul class="list__container" id="myList"></ul>
+                </section>
+                <section class="results" id="results--completed">
+                    <h2 class="todos__h2">Completed tasks!</h2>
+                    <button id="btn--delete">Clear</button>
+                    <ul class="list__container" id="mySecondList"></ul>
+            </div>
         </section>
         </section>
     </main>
