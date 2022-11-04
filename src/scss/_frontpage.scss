@@ -79,4 +79,15 @@ body {
       }
     }
   }
+  & .resultboxes {
+    display: flex;
+
+    width: 90%;
+    flex-direction: column;
+    @include mixins.for-size(desktop) {
+      width: 50%;
+      flex-direction: row;
+    }
+
+  }
 }
