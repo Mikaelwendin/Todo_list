@@ -2,98 +2,98 @@ import { Todos } from "./models/todos";
 
 let doneContainer = document.getElementById("myList");
 let notDoneContainer = document.getElementById("mySecondList");
-let objList = [];
+let allToDos = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadList(objList);
+  loadList(allToDos);
 });
 
 document.getElementById("btn--sort").addEventListener("click", () => {
-  sortList(objList);
+  sortList(allToDos);
 });
 document.getElementById("btn--delete").addEventListener("click", () => {
-  deleteFromList(objList, true, notDoneContainer);
+  deleteFromList(allToDos, true, notDoneContainer);
 });
 
 document.getElementById("btn").addEventListener("click", () => {
   if (document.getElementById("first").value.length !== 0) {
     let newToDo = new Todos(document.getElementById("first").value);
-    objList.push(newToDo);
+    allToDos.push(newToDo);
     document.getElementById("first").value = "";
-    addToDo(objList);
+    addToDo(allToDos);
   } else {
     window.alert("Ya'll need to type somethin'");
   }
 });
 
-function addToDo(objectList) {
+function addToDo(toDos) {
   doneContainer.innerHTML = "";
   notDoneContainer.innerHTML = "";
-  for (let i = 0; i < objectList.length; i++) {
+  for (let i = 0; i < toDos.length; i++) {
     let toDoItems = document.createElement("li");
-    if (objectList[i].isDone === false) {
+    if (toDos[i].isDone === false) {
       doneContainer.appendChild(toDoItems);
     }
-    if (objectList[i].isDone === true) {
+    if (toDos[i].isDone === true) {
       notDoneContainer.appendChild(toDoItems);
     }
     toDoItems.classList.add("clickable");
     toDoItems.addEventListener("click", () => {
-      handleClick(objectList[i], toDoItems, objectList);
+      handleClick(toDos[i], toDoItems, toDos);
     });
-    toDoItems.innerText = objectList[i].what;
-    localStorage.setItem("storageList", JSON.stringify(objList));
+    toDoItems.innerText = toDos[i].what;
+    localStorage.setItem("storageList", JSON.stringify(allToDos));
   }
 }
 
-function handleClick(obj, element, objectList) {
-  if (obj.isDone === false) {
-    obj.isDone = true;
-    element.innerText = "Done!";
-    element.classList.toggle("disable");
+function handleClick(toDo, markUp, toDos) {
+  if (toDo.isDone === false) {
+    toDo.isDone = true;
+    markUp.innerText = "Done!";
+    markUp.classList.toggle("disable");
     setTimeout(() => {
-      element.remove();
-      addToDo(objectList);
+      markUp.remove();
+      addToDo(toDos);
     }, 1000);
   } else {
-    obj.isDone = false;
-    element.remove();
-    addToDo(objectList);
+    toDo.isDone = false;
+    markUp.remove();
+    addToDo(toDos);
   }
 }
 
-function sortList(listToSort) {
-  let sortedList = listToSort;
-  if (sortedList) {
-    sortedList.sort((a, b) => (a.what > b.what ? 1 : a.what === b.what - 1));
-    for (let i = 0; i < sortedList.length; i++) {
-      listToSort[i] = sortedList[i];
+function sortList(toDoToSort) {
+  let sortedToDos = toDoToSort;
+  if (sortedToDos) {
+    sortedToDos.sort((a, b) => (a.what > b.what ? 1 : a.what === b.what - 1));
+    for (let i = 0; i < sortedToDos.length; i++) {
+      toDoToSort[i] = sortedToDos[i];
     }
-    addToDo(listToSort);
+    addToDo(toDoToSort);
   } else {
     window.alert("Nåt gick fel");
   }
 }
-function deleteFromList(listToSearch, target, element) {
-  for (let i = listToSearch.length - 1; i >= 0; i--) {
-    if (listToSearch[i].isDone === target) {
-      listToSearch.splice(i, 1);
+function deleteFromList(toDosToSearch, target, markUp) {
+  for (let i = toDosToSearch.length - 1; i >= 0; i--) {
+    if (toDosToSearch[i].isDone === target) {
+      toDosToSearch.splice(i, 1);
     }
 
-    while (element.hasChildNodes()) {
-      element.removeChild(element.firstChild);
+    while (markUp.hasChildNodes()) {
+      markUp.removeChild(markUp.firstChild);
     }
   }
-  localStorage.setItem("storageList", JSON.stringify(listToSearch));
+  localStorage.setItem("storageList", JSON.stringify(toDosToSearch));
 }
 
-function loadList(objectList) {
-  let storageList = JSON.parse(localStorage.getItem("storageList"));
-  if (storageList) {
-    for (let i = 0; i < storageList.length; i++) {
-      let newItem = new Todos(storageList[i].what, storageList[i].isDone);
-      objectList.push(newItem);
+function loadList(toDos) {
+  let storageToDos = JSON.parse(localStorage.getItem("storageList"));
+  if (storageToDos) {
+    for (let i = 0; i < storageToDos.length; i++) {
+      let newItem = new Todos(storageToDos[i].what, storageToDos[i].isDone);
+      toDos.push(newItem);
     }
-    addToDo(objectList);
+    addToDo(toDos);
   }
 }
